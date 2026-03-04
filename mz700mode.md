@@ -78,6 +78,8 @@ MZ-700 display mode is character-based: `40 × 25` character cells.
 Each screen cell uses one character byte and one color/attribute byte.
 
 Color/attribute byte usage:
+| Bit | Use |
+| :--- | :--- |
 | D7 | Used to activate the 2nd character set, PCG |
 | D6 | Green Foreground |
 | D5 | Red Foreground |
