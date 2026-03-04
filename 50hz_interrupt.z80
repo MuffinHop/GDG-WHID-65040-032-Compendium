@@ -25,7 +25,7 @@
         ld bc, interrupt_handler_end - interrupt_handler
         ldir
 
-
+; --- START OF SETTING UP 50 Hz INTERRUPT ---
         ; We are checking first if we are still in non-drawable area.
 wait_gfx_enter:
         in a,(0xFE)      ; Read PORT FEh into A
@@ -38,7 +38,7 @@ wait_gfx_exit:
         bit 5,a          ; Test Bit 5 
         jr nz,wait_gfx_exit   
         
-; At this point we have existed drawing screen and entered border area. Set up timer to generate interrupts at 50 Hz, RIGHT NOW, NO DILLY-DALLYING.
+        ; At this point GDG has existed drawing screen and entered border area. Set up timer to generate interrupts at 50 Hz, RIGHT NOW, NO DILLY-DALLYING.
         ; --- Set up 8253 timer for periodic interrupts at 50 Hz ---
         ; Counter 2: Mode 2 (rate generator, periodic)
         ld a,0xb4           ; 1011 0100b: select counter 2, mode 2, LSB+MSB
@@ -59,13 +59,14 @@ wait_gfx_exit:
         im 1                ; Interrupt Mode 1 (vector at 0x0038)
 
         ; The Interrupt is ready, you can now continue with your main program, the interrupt handler will be called at 50 Hz when GDG is drawing pixels on screen.
-
+; --- END OF SETTING UP 50 Hz INTERRUPT ---
 
 main_loop:
         ; Your main program code goes here. The interrupt handler will be called at 50 Hz when GDG is drawing pixels on screen.
         ; For demonstration, we will just loop indefinitely.
         jp main_loop
 
+; --- WE WILL CALL THIS FUNCTION ONCE PER FRAME, SO 50 TIMES A SECOND ---
 interrupt_handler: ; We are now in non-drawable area, accessing VRAM is faster and safer right now.
         di                  ; Disable interrupts during 50 Hz interrupt handler execution to prevent nested interrupts
 
