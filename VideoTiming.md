@@ -7,9 +7,9 @@ VRAM access for the CPU is handled via bitplane latches. When running in 320x200
 ## CPU wait
 
 ![320x200, with 16 colors timings as an example](16color_display_timings.png)
-### Write (Number 1. in diagram)
+### Write (1) 
 • As there is a one-byte buffer in the GDG, write to the VRAM from the CPU is carried out through the buffer. But, actual write to the VRAM is done by the GDG with write latches, this usually aligns with GDG flip-flopping VRAM access during display period. 
-### Read (Number 2. in diagram)
+### Read (2)
 Wait is issued along with the CPU write action both during displaying and flyback periods to perform reading operation in synchronization with the CPU cycle.
 
 ![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
