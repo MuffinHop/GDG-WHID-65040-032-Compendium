@@ -26,6 +26,8 @@
         ldir
 
 ; --- START OF SETTING UP 50 Hz INTERRUPT ---
+        xor a
+        ld i, a
         ; We are checking first if we are still in non-drawable area.
 wait_gfx_enter:
         in a,(0xFE)      ; Read PORT FEh into A
