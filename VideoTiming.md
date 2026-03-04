@@ -3,12 +3,15 @@
 Both GDG and CPU are given turns in accessing the VRAM. 
 Accessing of the VRAM for the CPU is handled in a cycle-steal mode in MZ-800 mode. In MZ-700 mode this is only allowed during HBLANK, VBLANK and two writes during display period.
 VRAM access for the CPU is handled via bitplane latches. When running in 320x200 16 color mode we spend two CPU cycles to write data due to needing to write to bitplanes 2 and 4.
+
 ## CPU wait
+
 ![320x200, with 16 colors timings as an example](16color_display_timings.png)
 ### Write (Number 1. in diagram)
 • As there is a one-byte buffer in the GDG, write to the VRAM from the CPU is carried out through the buffer. But, actual write to the VRAM is done by the GDG with write latches, this usually aligns with GDG flip-flopping VRAM access during display period. 
 ### Read (Number 2. in diagram)
 Wait is issued along with the CPU write action both during displaying and flyback periods to perform reading operation in synchronization with the CPU cycle.
+
 ![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
 
 | Signal Name | I/O | Functional description | Note |
