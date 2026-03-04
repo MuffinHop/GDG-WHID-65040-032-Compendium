@@ -7,6 +7,6 @@ A lot of the forum and bbs discussions have already been lost so it is high time
 
 There is still a lot of unknowns and mysteries related to GDG WHID-65040-032 and I am more than happy to take pull requests or have a discussion. 
 
-
-
 *The document will often shorten GDG WHID-65040-032 to just GDG*
+
+The code segment contains program examples written in Z80 Assembly otherwise [Head Straight to the Wiki](https://github.com/MuffinHop/GDG-WHID-65040-032-Compendium/wiki)
