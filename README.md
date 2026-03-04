@@ -4,10 +4,4 @@ This document was started as a resource for me to gather all the info into one p
 A lot of the forum and bbs discussions have already been lost so it is high time to gather information on this chips behaviour in one sure place.
 There is still a lot of unknowns and mysteries related to GDG WHID-65040-032 and I am more than happy to take pull requests or have a discussion. 
 
-*The document may shorten GDG WHID-65040-032 to just GDG*
-
-## Brief warning when creating MZ-700 software on the MZ-800
-The GDG attempts to replicate the behaviour of the MZ-700's display generator M60719, but you should be warned that it is rather different in its behaviour although there are some similarities. 
-- The hardware asserts the /WAIT signal when the drawable area is being generated. The /WAIT is only released during the Horizontal Blanking (HBLANK) or Vertical Blanking (VBLANK) intervals. 
-- ROM from 0xE000 may be mapped together with VRAM on mode switch.
-- There may be other unkwowns that aren't well documented.
+*The document will often shorten GDG WHID-65040-032 to just GDG*

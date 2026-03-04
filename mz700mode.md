@@ -3,7 +3,7 @@ The MZ-700 mode is a legacy mode attempting to replicate the behaviour of the M6
 MZ-700 mode activates when `DMD = 0x08` is written to port `0xCE`.
 
 ## I/O port register mappings
-Switching to MZ-700 mode will change several I/O port register mappings. MZ-700 mode remaps I/O to memory-mapped registers in the 0xCx000-0xEx000 range.
+Switching to MZ-700 mode will change several I/O port register mappings. 
 
 ---
 
@@ -101,14 +101,12 @@ During active video, the display controller repeatedly performs a fixed fetch se
 
 Because these reads occur continuously while the beam is active, VRAM/CG memory bandwidth is shared between the video generator and the CPU.
 
-### 3) Difference to the M60719
+### 3) Scroll behavior note
 
-The original MZ-700 M60719 only allowed writes to VRAM during HBLANK and VBKLANK. But the MZ-800's GDG allows you to access VRAM during a display period. 
-On GDG the wait is issued along with the CPU write action both during displaying in a flip-flop fashion(pseudo cycle steal) when accessing VRAM and during flyback periods. This is a critical reason you may have a lot of difficulty programming accurate chasing the beam effects on your MZ-800 that also work on the 700, even though 700 demos might work on your 800 just fine.
+The MZ-800 hardware scroll register can not be used in MZ-700 mode! *This is probably due to different multiplexing and address retriaval methods internally.*
 
-### 4) Scroll behavior note
-
-The MZ-800 hardware scroll register can not be used in MZ-700 mode! *This probably due to different multiplexing and address retriaval methods internally.*
+### 4) VRAM Access
+Writes to VRAM should be doneduring HBLANK and VBKLANK, though GDG allows two writes during display period(different from real MZ-700, and M60719 chip). This differs from MZ-800 modes.
 
 
 ## Sources
