@@ -26,7 +26,6 @@ Derived visible width (including borders):
 | **VTOTAL** | **312** | Total lines (`0..311`) |
 
 
-
 ---
 
 # NTSC Video Timing
@@ -56,8 +55,9 @@ Derived visible width (including borders):
 | VBLANK | 62 | Vertical blanking lines |
 | **VTOTAL** | **262** | Total lines (`0..261`) |
 
+---
 
-
+## **Sources**
 
 - [Nobomi PAL timings on MZ800](https://www.nobomi.cz/8bit/doc/mz800pal.php)
 - [Nobomi NTSC timings on MZ800](https://www.nobomi.cz/8bit/doc/mz800pal.php)
