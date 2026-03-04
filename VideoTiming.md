@@ -15,7 +15,7 @@ Wait is issued along with the CPU write action both during displaying and flybac
 
 ![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
 
-*Write and Read is post poned to late in flyback in MZ-700 mode*
+*Write and Read is pushed to happen later during flyback in MZ-700 mode*
 
 | Signal Name | I/O | Functional description | Note |
 | :--- | :--- | :--- | :--- |
