@@ -114,12 +114,12 @@ In total, there are 262 lines, not interlaced.
 
 | Phase | Pixel Clocks | CPU Clocks |  Notes |
 | :--- | ---: | ---: | :--- |
-| H_SYNC pulse | 64 |  TODO | Sync pulse at start of line timing sequence |
-| Pre-sync interval | 74 |  TODO | Interval before visible border starts |
-| Left border | 58 |  TODO | Visible border area |
-| Active graphics | 640 |  TODO | Main pixel area (same as PAL) |
-| Right border | 54 | TODO | Visible border area |
-| Pre-next-line interval | 22 | TODO | Interval before next line sync |
+| H_SYNC pulse | 64 | ~16 | Sync pulse at start of line timing sequence |
+| Pre-sync interval | 74 |  ~18 | Interval before visible border starts |
+| Left border | 58 |  ~14 | Visible border area |
+| Active graphics | 640 | ~158.5 | Main pixel area (same as PAL) |
+| Right border | 54 | ~13 | Visible border area |
+| Pre-next-line interval | 22 | ~5.5 | Interval before next line sync |
 | **Total line period** | **912** | 226 Z80 CPU cycles | `64 + 74 + 58 + 640 + 54 + 22` |
 
 Derived visible width (including borders):
