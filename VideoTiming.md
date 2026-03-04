@@ -14,7 +14,8 @@ VRAM access for the CPU is handled via bitplane latches. When running in 320x200
 Wait is issued along with the CPU write action both during displaying and flyback periods to perform reading operation in synchronization with the CPU cycle.
 
 ![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
-*Write and Read is post poned to late in Flyback on MZ-700 mode*
+
+*Write and Read is post poned to late in flyback in MZ-700 mode*
 
 | Signal Name | I/O | Functional description | Note |
 | :--- | :--- | :--- | :--- |
