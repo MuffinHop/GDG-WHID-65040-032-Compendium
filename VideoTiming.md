@@ -7,12 +7,14 @@ VRAM access for the CPU is handled via bitplane latches. When running in 320x200
 ## CPU wait
 
 ![320x200, with 16 colors timings as an example](16color_display_timings.png)
+*One VRAS is 451ns, which is approx 1.6 CPU cycles*
 ### Write (1) 
 • As there is a one-byte buffer in the GDG, write to the VRAM from the CPU is carried out through the buffer. But, actual write to the VRAM is done by the GDG with write latches, this usually aligns with GDG flip-flopping VRAM access during display period. 
 ### Read (2)
 Wait is issued along with the CPU write action both during displaying and flyback periods to perform reading operation in synchronization with the CPU cycle.
 
 ![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
+*Write and Read is post poned to late in Flyback on MZ-700 mode*
 
 | Signal Name | I/O | Functional description | Note |
 | :--- | :--- | :--- | :--- |
@@ -20,7 +22,7 @@ Wait is issued along with the CPU write action both during displaying and flybac
 | VCAS | O | VRAM Column Address Strobe, control signal | Active low |
 | VOE | O | Video Output Enable | Active low |
 | VOD0..7 | O | VRAM address signal (multiplexer output) | - |
-| VRWR | O | VVRAM write signal | Active low |
+| VRWR | O | VRAM write signal | Active low |
 | VA0..7 | I/O | VRAM data bus (standard RAM)| |
 | VC0..7 | I/O | VRAM data bus (optional RAM)| |
 | HBLN | - | Horizontal Retrace aka HBLANK | Active low |
