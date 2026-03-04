@@ -1,0 +1,78 @@
+        ; VBlank Tutorial for MZ-800
+        ; This code demonstrates how to set up a simple interrupt handler that triggers at 50 Hz
+
+        ORG 0x2000
+        di
+        ; --- Set video mode ---
+        ld a,%00000010    ; 16KB screen
+        out (0xce),a      ; set screen mode MZ-800
+        ld a,0
+        out (0xE0),a      ; RAM at 0000-1FFF
+        out (0xE6),a      ; RAM at 0000-7FFF
+        out (0xE1),a      ; RAM at D000-FFFF
+                          ; We don't need no ROM. All we see is RAM.
+
+
+        ld bc, 0x07CF
+        xor a 
+        out (c),a        ; PAL mode, if you want NTSC put in 0x80
+
+        ld sp, 0x6000     ; Stack pointer somewhere safe in RAM, not overlapping with screen memory or interrupt vector 
+
+        ; --- Install interrupt handler at 0x0038 ---
+        ld hl, interrupt_handler
+        ld de, 0x0038
+        ld bc, interrupt_handler_end - interrupt_handler
+        ldir
+
+
+        ; We are checking first if we are still in non-drawable area.
+wait_gfx_enter:
+        in a,(0xFE)      ; Read PORT FEh into A
+        bit 5,a          ; Test Bit 5 
+        jr z,wait_gfx_enter   
+
+        ; We are checking if GDG is drawing pixels onto screen
+wait_gfx_exit:
+        in a,(0xFE)      ; Read PORT FEh into A
+        bit 5,a          ; Test Bit 5 
+        jr nz,wait_gfx_exit   
+        
+; At this point we have existed drawing screen and entered border area. Set up timer to generate interrupts at 50 Hz, RIGHT NOW, NO DILLY-DALLYING.
+        ; --- Set up 8253 timer for periodic interrupts at 50 Hz ---
+        ; Counter 2: Mode 2 (rate generator, periodic)
+        ld a,0xb4           ; 1011 0100b: select counter 2, mode 2, LSB+MSB
+        out (0xd7),a        ; 8253 control word register
+        ld a,0x01
+        out (0xd6),a        ; counter 2 data port (LSB)
+        ld a,0x00
+        out (0xd6),a        ; counter 2 data port (MSB)
+
+        ; Counter 1: Mode 4 (software trigger), LSB then MSB
+        ld a,0x74           ; 0111 0100b: select counter 1, mode 4, LSB+MSB
+        out (0xd7),a        ; 8253 control word register
+        ld a,156
+        out (0xd5),a        ; counter 1 data port (LSB)
+        ld a,0
+        out (0xd5),a        ; counter 1 data port (MSB)
+        ei
+        im 1                ; Interrupt Mode 1 (vector at 0x0038)
+
+        ; The Interrupt is ready, you can now continue with your main program, the interrupt handler will be called at 50 Hz when GDG is drawing pixels on screen.
+
+
+main_loop:
+        ; Your main program code goes here. The interrupt handler will be called at 50 Hz when GDG is drawing pixels on screen.
+        ; For demonstration, we will just loop indefinitely.
+        jp main_loop
+
+interrupt_handler: ; We are now in non-drawable area, accessing VRAM is faster and safer right now.
+        di                  ; Disable interrupts during 50 Hz interrupt handler execution to prevent nested interrupts
+
+        ld a, r             
+        ld bc,0x06CF
+        out (c),a           ; set border color
+
+        ei                  ; Exiting Interrupt Code. Re-enable interrupts
+        reti                ; Return from interrupt
+interrupt_handler_end:
