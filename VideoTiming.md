@@ -82,7 +82,7 @@ In total, there are 312 lines, not interlaced.
 | Active graphics | 640 | ~128 | Main pixel area |
 | Right border | 134 | ~26.8 | Visible border area |
 | Pre-next-line interval | 22 | ~4.4 | Interval before next line sync |
-| **Total line period** | **1136** |  227 Z80 CPU cycles | `80 + 106 + 154 + 640 + 134 + 22` |
+| **Total line period** | **1136** |  **227** Z80 CPU cycles | `80 + 106 + 154 + 640 + 134 + 22` |
 
 Derived visible width (including borders):
 
@@ -120,7 +120,7 @@ In total, there are 262 lines, not interlaced.
 | Active graphics | 640 | ~158.5 | Main pixel area (same as PAL) |
 | Right border | 54 | ~13 | Visible border area |
 | Pre-next-line interval | 22 | ~5.5 | Interval before next line sync |
-| **Total line period** | **912** | 226 Z80 CPU cycles | `64 + 74 + 58 + 640 + 54 + 22` |
+| **Total line period** | **912** | **226** Z80 CPU cycles | `64 + 74 + 58 + 640 + 54 + 22` |
 
 Derived visible width (including borders):
 
