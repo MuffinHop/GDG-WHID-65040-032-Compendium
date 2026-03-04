@@ -29,7 +29,9 @@ Wait is issued along with the CPU write action both during displaying and flybac
 | CPU.WR | - | CPU read or write | Active low |
 | VRAM.WR | - | Actual VRAM read or write event | Active low |
 
-
+![320x200](320x200_display_timing.png)
+![640x200](640x200_display_timing.png)
+![MZ700](MZ700_display_timing.png)
 # PAL Video Timing 
 In total, there are 312 lines, not interlaced. 
 
