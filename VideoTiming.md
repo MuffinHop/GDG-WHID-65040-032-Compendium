@@ -74,15 +74,15 @@ In total, there are 312 lines, not interlaced.
 
 ## Horizontal timing (per line)
 
-| Segment | Pixel Clocks | Notes |
-| :--- | ---: | :--- |
-| H_SYNC pulse | 80 | Sync pulse at start of line timing sequence |
-| Post-sync interval | 106 | Interval before visible border starts |
-| Left border | 154 | Visible border area |
-| Active graphics | 640 | Main pixel area |
-| Right border | 134 | Visible border area |
-| Pre-next-line interval | 22 | Interval before next line sync |
-| **Total line period** | **1136** | `80 + 106 + 154 + 640 + 134 + 22` |
+| Phase | Pixel Clocks | CPU Clocks |  Notes |
+| :--- | ---: | ---: | :--- |
+| H_SYNC pulse | 80  | TODO | Sync pulse at start of line timing sequence |
+| Post-sync interval | 106 | TODO | Interval before visible border starts |
+| Left border | 154 | TODO | Visible border area |
+| Active graphics | 640 | TODO | Main pixel area |
+| Right border | 134 | TODO | Visible border area |
+| Pre-next-line interval | 22 | TODO | Interval before next line sync |
+| **Total line period** | **1136** |  227 Z80 CPU cycles | `80 + 106 + 154 + 640 + 134 + 22` |
 
 Derived visible width (including borders):
 
@@ -112,14 +112,15 @@ In total, there are 262 lines, not interlaced.
 
 ## Horizontal timing (per line)
 
-| Segment | Pixel Clocks | Notes |
-| :--- | ---: | :--- |
-| Pre-sync interval | 74 | Interval before visible border starts |
-| Left border | 58 | Visible border area |
-| Active graphics | 640 | Main pixel area (same as PAL) |
-| Right border | 54 | Visible border area |
-| Pre-next-line interval | 22 | Interval before next line sync |
-| **Total line period** | **912** | `74 + 58 + 640 + 54 + 22` (approx.) |
+| Phase | Pixel Clocks | CPU Clocks |  Notes |
+| :--- | ---: | ---: | :--- |
+| H_SYNC pulse | 64 |  TODO | Sync pulse at start of line timing sequence |
+| Pre-sync interval | 74 |  TODO | Interval before visible border starts |
+| Left border | 58 |  TODO | Visible border area |
+| Active graphics | 640 |  TODO | Main pixel area (same as PAL) |
+| Right border | 54 | TODO | Visible border area |
+| Pre-next-line interval | 22 | TODO | Interval before next line sync |
+| **Total line period** | **912** | 226 Z80 CPU cycles | `64 + 74 + 58 + 640 + 54 + 22` |
 
 Derived visible width (including borders):
 
