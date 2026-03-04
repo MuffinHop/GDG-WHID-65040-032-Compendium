@@ -4,12 +4,26 @@ Both GDG and CPU are given turns in accessing the VRAM.
 Accessing of the VRAM for the CPU is handled in a cycle-steal mode in MZ-800 mode. In MZ-700 mode this is only allowed during HBLANK, VBLANK and two writes during display period.
 VRAM access for the CPU is handled via bitplane latches. When running in 320x200 16 color mode we spend two CPU cycles to write data due to needing to write to bitplanes 2 and 4.
 ## CPU wait
-### Write
+![320x200, with 16 colors timings as an example](16color_display_timings.png)
+### Write (Number 1. in diagram)
 • As there is a one-byte buffer in the GDG, write to the VRAM from the CPU is carried out through the buffer. But, actual write to the VRAM is done by the GDG with write latches, this usually aligns with GDG flip-flopping VRAM access during display period. 
-### Read
+### Read (Number 2. in diagram)
 Wait is issued along with the CPU write action both during displaying and flyback periods to perform reading operation in synchronization with the CPU cycle.
+![During Flyback, VRAM Read can cause a /WAIT on the CPU](WAIT_on_Flyback.png)
 
-![320x200, with 16 colors timings](16color_display_timings.png)
+| Signal Name | I/O | Functional description | Note |
+| :--- | :--- | :--- | :--- |
+| VRAS | O | VRAM Row Address Strobe, control signal | Active low |
+| VCAS | O | VRAM Column Address Strobe, control signal | Active low |
+| VOE | O | Video Output Enable | Active low |
+| VOD0..7 | O | VRAM address signal (multiplexer output) | - |
+| VRWR | O | VVRAM write signal | Active low |
+| VA0..7 | I/O | VRAM data bus (standard RAM)| |
+| VC0..7 | I/O | VRAM data bus (optional RAM)| |
+| HBLN | - | Horizontal Retrace aka HBLANK | Active low |
+| CPU.WR | - | CPU read or write | Active low |
+| VRAM.WR | - | Actual VRAM read or write event | Active low |
+
 
 # PAL Video Timing 
 In total, there are 312 lines, not interlaced. 
